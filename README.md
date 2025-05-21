@@ -12,8 +12,9 @@
 - **핵심 기술**:  
   - AI 경로 추천 알고리즘  
   - IoT 센서 기반 위험 지역 감지  
-  - OpenStreetMap(OSM)  
+  - TMap
   - Streamlit / Flask 기반 웹앱
+  - Gemini Chat
 
 ---
 
@@ -30,20 +31,20 @@
 ### 1. 사용자 웹앱
 - **모바일/PC 웹 기반 길안내**
 - Streamlit 또는 Flask 기반 인터페이스
-- OpenStreetMap(OSM) 연동
+- Tmap, Gemini 연동
 
 ### 2. AI 경로 최적화
 - 사용자 유형(노약자, 휠체어 이용자 등)과 지형 데이터를 반영한 **맞춤형 경로 탐색**
-- 급경사, 계단, 보도 단차 회피 경로 제공
+- 급경사, 계단, 보도 단차, 고장 엘리베이터 회피 경로 제공
 
-### 3. IoT 연동
-- **스마트 횡단보도**, **경사 센서**, **보행 인프라 상태 감지 센서** 등과 연동
-- 위험 구간 데이터 실시간 수집 및 반영
-
-### 4. 관리자 대시보드
+### 3. 관리자 대시보드
 - 경로 요청 및 이용자 통계 시각화
 - 위험 지역 피드백 반영
 - 향후 경로 개선을 위한 데이터 기반 인사이트 제공
+
+### 4. IoT 연동
+- **스마트 횡단보도**, **경사 센서**, **보행 인프라 상태 감지 센서** 등과 연동
+- 위험 구간 데이터 실시간 수집 및 반영
 
 ---
 
@@ -78,11 +79,11 @@
 
 ## 📂 기술 스택
 
-- **Frontend**: Streamlit / Flask, HTML5, CSS
+- **Frontend**: Streamlit / Flask, Figma
 - **Backend**: Python, FastAPI, RESTful API
-- **지도 서비스**: OpenStreetMap, Leaflet.js
+- **지도 서비스**: T-map API
 - **데이터 처리**: Pandas, GeoPandas, NumPy
-- **AI/ML**: scikit-learn (경로 최적화)
+- **AI/ML**: scikit-learn (경로 최적화), Gemini API
 - **IoT 연동**: MQTT, Firebase, Arduino/Raspberry Pi
 - **DevOps**: Docker, GitHub Actions, AWS EC2
 
@@ -103,3 +104,6 @@
 ## 📫 문의
 
 > 프로젝트에 대한 문의는 Issues 또는 [your-email@example.com] 으로 연락 주세요.
+
+---
+

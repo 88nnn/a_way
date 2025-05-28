@@ -80,6 +80,5 @@ if st.button("회원가입 완료"):
             "관계2": relation2 or None,
             "이메일": email or None
         }
-        #st.session_state.user_data = user_data
         st.success("회원가입이 완료되었습니다!")
         st.switch_page("pages/log_in.py")

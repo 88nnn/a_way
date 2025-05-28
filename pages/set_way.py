@@ -88,5 +88,7 @@ if st.button("🚩 출발지/목적지 선택 완료"):
         tts_speak("출발지와 목적지를 모두 입력해 주세요.")
         st.error("출발지와 목적지를 모두 입력해 주세요.")
     else:
+        st.session_state.guide_data = {"start": start_point, "end": end_point}
         tts_speak(f"출발지는 {start_point}, 목적지는 {end_point}로 설정되었습니다.")
         st.success("경로 계산을 시작합니다...")
+        st.page_link("pages/guide_way.py", label="경로 추천 시작", icon="📝")

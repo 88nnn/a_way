@@ -1,12 +1,5 @@
 import streamlit as st
 
-def login_success():
-    st.session_state.page = 'set_way'  # 로그인 후 이동할 페이지
-    st.success("로그인에 성공했습니다.")
-
-def go_to_signup():
-    st.session_state.page = 'sign_up'
-
 st.title("로그인")
 
 username = st.text_input("이름")

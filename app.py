@@ -3,7 +3,7 @@ import streamlit as st
 import streamlit_folium
 import folium
 import streamlit_TTS as st_tts
-import pyaudio2
+import pyaudio
 import pyttsx3
 import speech_recognition as sr
 
@@ -14,6 +14,7 @@ import streamlit as st
 
 st.set_page_config(page_title="접근성 내비 앱", layout="centered")
 st.write("앱에 오신 것을 환영합니다! 왼쪽 사이드바에서 원하는 기능을 선택하세요.")
+"""
 
 # 홈페이지로 이동 유도
 st.page_link("Home.py", label="🏠 처음 화면으로", icon="🏠")
@@ -54,3 +55,4 @@ if user_input:
     streamlit_folium.st_folium(m, width=700, height=400)
 
 #model
+"""

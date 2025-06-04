@@ -16,11 +16,6 @@ except Exception as e:
     st.stop()
 st.write("DEBUG - secrets:", st.secrets)
 
-# TTS 엔진 초기화
-engine = pyttsx3.init()
-def browser_tts(text):
-    engine.say(text)
-    engine.runAndWait()
 
 # 상태 초기화
 if "tts_index" not in st.session_state:

@@ -10,3 +10,4 @@ PyAudio~=0.2.14
 playsound~=1.2.2
 gTTS~=2.5.4
 gTTS-token~=1.1.4
+portaudio19-dev

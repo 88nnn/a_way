@@ -1,5 +1,4 @@
 import streamlit as st
-from tts_utils import play_tts_lines
 
 # 탭 및 글쓰기 버튼
 col1, col2 = st.columns([8, 2])

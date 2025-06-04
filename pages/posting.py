@@ -1,6 +1,5 @@
 import streamlit as st
 import datetime
-from tts_utils import play_tts_lines
 
 now = datetime.datetime.now()
 

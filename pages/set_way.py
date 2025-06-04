@@ -6,7 +6,17 @@ import streamlit.components.v1 as components
 
 st.set_page_config(page_title="교통약자 AI 이동 도우미", page_icon="🚶", layout="centered")
 st.title("🚦 교통약자 이동 도우미")
-
+# 브라우저 기반 TTS 함수
+def browser_tts(text):
+    escaped = text.replace("'", "\\'")
+    components.html(f"""
+        <script>
+        const msg = new SpeechSynthesisUtterance('{escaped}');
+        msg.lang = 'ko-KR';
+        window.speechSynthesis.cancel();
+        window.speechSynthesis.speak(msg);
+        </script>
+    """, height=0)
 # T-Map API 정보 설정
 T_MAP_API_KEY = st.secrets["api_key"]#"YOUR_TMAP_API_KEY"
 try:
@@ -188,17 +198,7 @@ if "tts_line_index" not in st.session_state:
 line_index = st.session_state.tts_line_index
 current_line = tts_lines[line_index]
 
-# 브라우저 기반 TTS 함수
-def browser_tts(text):
-    escaped = text.replace("'", "\\'")
-    components.html(f"""
-        <script>
-        const msg = new SpeechSynthesisUtterance('{escaped}');
-        msg.lang = 'ko-KR';
-        window.speechSynthesis.cancel();
-        window.speechSynthesis.speak(msg);
-        </script>
-    """, height=0)
+
 
 # 버튼 인터페이스
 col1, col2, col3 = st.columns(3)

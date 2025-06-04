@@ -2,7 +2,6 @@
 # 교통약자 유형 선택
 import streamlit as st
 import re
-from tts_utils import play_tts_lines
 
 st.title("회원가입")
 

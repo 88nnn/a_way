@@ -1,8 +1,8 @@
 import requests
 import streamlit as st
 import speech_recognition as sr
-import pyttsx3
-from tts_utils import play_tts_lines
+import streamlit as st
+import streamlit.components.v1 as components
 
 st.set_page_config(page_title="교통약자 AI 이동 도우미", page_icon="🚶", layout="centered")
 st.title("🚦 교통약자 이동 도우미")
@@ -18,7 +18,7 @@ st.write("DEBUG - secrets:", st.secrets)
 
 # TTS 엔진 초기화
 engine = pyttsx3.init()
-def tts_speak(text):
+def browser_tts(text):
     engine.say(text)
     engine.runAndWait()
 
@@ -118,7 +118,7 @@ with col8:
     # 검색 버튼
     if st.button("🚩 출발지/목적지 검색 시작"):
         if not start_point:
-            tts_speak("출발지를 입력해 주세요.")
+            browser_tts("출발지를 입력해 주세요.")
             st.error("출발지를 입력해 주세요.")
         else:
             st.session_state.start_results = search_place(start_point)
@@ -126,7 +126,7 @@ with col8:
                 st.session_state.selected_start = st.session_state.start_results[0]  # 기본 첫 번째 선택
 
         if not end_point:
-            tts_speak("목적지를 입력해 주세요.")
+            browser_tts("목적지를 입력해 주세요.")
             st.error("목적지를 입력해 주세요.")
         else:
             st.session_state.end_results = search_place(end_point)
@@ -169,9 +169,58 @@ with col8:
                 }
             }
             confirm_text = f"출발지는 {st.session_state.selected_start['name']}, 목적지는 {st.session_state.selected_end['name']}로 설정되었습니다.\n아래의 경로 추천 시작 버튼을 눌러주세요!"
-            tts_speak(confirm_text)
+            browser_tts(confirm_text)
             st.success(confirm_text)
             st.page_link("pages/guide_way.py", label="경로 추천 시작", icon="📝")
         else:
-            tts_speak("출발지와 목적지를 모두 선택해 주세요.")
+            browser_tts("출발지와 목적지를 모두 선택해 주세요.")
             st.error("출발지와 목적지를 모두 선택해 주세요.")
+
+
+# 경로 안내 문장 리스트 예시 (API 연동 시 여기 자동 구성 가능)
+tts_lines = [
+    "출발지에서 30미터 직진하세요.",
+    "횡단보도를 건너고 좌회전하세요.",
+    "엘리베이터를 이용해 2층으로 이동하세요.",
+    "목적지는 오른쪽에 있습니다."
+]
+
+# 현재 줄 인덱스 저장
+if "tts_line_index" not in st.session_state:
+    st.session_state.tts_line_index = 0
+
+# 현재 줄 가져오기
+line_index = st.session_state.tts_line_index
+current_line = tts_lines[line_index]
+
+# 브라우저 기반 TTS 함수
+def browser_tts(text):
+    escaped = text.replace("'", "\\'")
+    components.html(f"""
+        <script>
+        const msg = new SpeechSynthesisUtterance('{escaped}');
+        msg.lang = 'ko-KR';
+        window.speechSynthesis.cancel();
+        window.speechSynthesis.speak(msg);
+        </script>
+    """, height=0)
+
+# 버튼 인터페이스
+col1, col2, col3 = st.columns(3)
+with col1:
+    if st.button("◀ 이전 줄") and line_index > 0:
+        st.session_state.tts_line_index -= 1
+        browser_tts(tts_lines[st.session_state.tts_line_index])
+
+with col2:
+    if st.button("🔁 다시 듣기"):
+        browser_tts(current_line)
+
+with col3:
+    if st.button("▶ 다음 줄") and line_index < len(tts_lines) - 1:
+        st.session_state.tts_line_index += 1
+        browser_tts(tts_lines[st.session_state.tts_line_index])
+
+# 현재 줄 시각화
+st.info(f"📢 현재 안내: {current_line}")
+

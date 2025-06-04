@@ -2,12 +2,8 @@ import streamlit as st
 import requests
 import polyline
 import pydeck as pdk
-import pyttsx3
-from gtts import gTTS
 import os
-from playsound import playsound
 import threading
-from tts_utils import play_tts_lines
 
 # T-Map API 정보 설정
 T_MAP_API_KEY = st.secrets["api_key"]

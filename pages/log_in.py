@@ -1,5 +1,4 @@
 import streamlit as st
-from tts_utils import play_tts_lines
 
 st.title("로그인")
 

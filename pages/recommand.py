@@ -5,6 +5,16 @@ def recommend_best_path(paths, user_type):
     # "stairs": ,
     # "safety": ,
     # "elevator": },
+
+    transport =
+    #장애 사항
+    disability_detail =
+    disability_option = ""
+    #나이
+    age =
+    #성별
+    gender =
+
     weights = {
         #검증 필요...
         "elderly": {"slope": 3, "sidewalk": 2, "stairs": 5, "safety": 4},

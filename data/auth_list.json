@@ -1,0 +1,14 @@
+[{
+            "name": "비회원1",
+            "password": "1q2w3e$r",
+            "transport": "wheelchair",
+            "disability_detail": "",
+  "disability_option": {"toilet", "elevator", "charger", "other", },
+            "age": ,
+            "gender": ,
+            "phone1": ,
+            "relation1": ,
+            "phone2": ,
+            "relation2": ,
+            "email":
+        }]

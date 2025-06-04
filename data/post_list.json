@@ -1,0 +1,19 @@
+[
+  {
+  "idx": 1,
+  "author": "비회원1",
+  "title": "제보",
+  "content": "",
+  "dataframe": { "lon": "", "lat": "" },
+  "obstacle": ""
+  },
+  {
+    "idx": 2,
+  "author": "비회원0",
+  "title": "제보",
+  "content": "",
+  "dataframe": "",
+  "obstacle": ""
+  }
+]
+

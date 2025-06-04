@@ -1,3 +1,10 @@
-streamlit
-folium
+streamlit~=1.45.1
+folium~=0.19.6
 streamlit-folium
+requests~=2.32.3
+polyline~=2.0.2
+pydeck~=0.9.1
+streamlit_folium~=0.25.0
+SpeechRecognition~=3.14.3
+pyttsx3~=2.98
+PyAudio~=0.2.14

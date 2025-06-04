@@ -1,9 +1,12 @@
-import streamlit as st
+
 import requests
 import polyline
 import pydeck as pdk
 import os
 import threading
+
+import streamlit as st
+import streamlit.components.v1 as components
 
 # T-Map API 정보 설정
 T_MAP_API_KEY = st.secrets["api_key"]
@@ -105,11 +108,50 @@ if start_text and end_text and start_coor and end_coor:
 else:
     st.warning("출발지 또는 도착지 정보가 부족합니다.")
 
-# TTS 제어 UI
-tts_lines = st.session_state.tts_lines
 
+# 경로 안내 문장 리스트 예시 (API 연동 시 여기 자동 구성 가능)
+tts_lines = [
+    "출발지에서 30미터 직진하세요.",
+    "횡단보도를 건너고 좌회전하세요.",
+    "엘리베이터를 이용해 2층으로 이동하세요.",
+    "목적지는 오른쪽에 있습니다."
+]
+
+# 현재 줄 인덱스 저장
+if "tts_line_index" not in st.session_state:
+    st.session_state.tts_line_index = 0
+
+# 현재 줄 가져오기
 line_index = st.session_state.tts_line_index
+current_line = tts_lines[line_index]
 
-play_tts_lines(tts_lines, line_index)
+# 브라우저 기반 TTS 함수
+def browser_tts(text):
+    escaped = text.replace("'", "\\'")
+    components.html(f"""
+        <script>
+        const msg = new SpeechSynthesisUtterance('{escaped}');
+        msg.lang = 'ko-KR';
+        window.speechSynthesis.cancel();
+        window.speechSynthesis.speak(msg);
+        </script>
+    """, height=0)
 
-st.write(tts_lines)
+# 버튼 인터페이스
+col1, col2, col3 = st.columns(3)
+with col1:
+    if st.button("◀ 이전 줄") and line_index > 0:
+        st.session_state.tts_line_index -= 1
+        browser_tts(tts_lines[st.session_state.tts_line_index])
+
+with col2:
+    if st.button("🔁 다시 듣기"):
+        browser_tts(current_line)
+
+with col3:
+    if st.button("▶ 다음 줄") and line_index < len(tts_lines) - 1:
+        st.session_state.tts_line_index += 1
+        browser_tts(tts_lines[st.session_state.tts_line_index])
+
+# 현재 줄 시각화
+st.info(f"📢 현재 안내: {current_line}")

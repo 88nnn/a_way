@@ -155,3 +155,5 @@ with col3:
 
 # 현재 줄 시각화
 st.info(f"📢 현재 안내: {current_line}")
+
+st.write(tts_lines)

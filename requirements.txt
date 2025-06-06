@@ -5,3 +5,4 @@ polyline~=2.0.2
 pydeck~=0.9.1
 streamlit_folium~=0.25.0
 SpeechRecognition~=3.14.3
+streamlit-folium

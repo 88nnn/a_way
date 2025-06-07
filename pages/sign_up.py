@@ -2,12 +2,50 @@
 # 교통약자 유형 선택
 import streamlit as st
 import re
+import os
+import json
 
 st.title("회원가입")
 
 # 필수 입력
 st.text("필수: 가입 후 식별을 위해 필요합니다.")
 name = st.text_input("이름 (중복 시 숫자가 자동 추가됩니다.)")
+if st.button("이름 중복 확인"):
+    if name:
+        # 파일 경로
+        auth_file_path = "data/auth_list.json"
+
+    # 폴더 없으면 생성
+        os.makedirs(os.path.dirname(auth_file_path), exist_ok=True)
+
+    # 기존 파일 읽기
+        if os.path.exists(auth_file_path):
+            with open(auth_file_path, "r", encoding="utf-8") as f:
+                try:
+                    auth_list = json.load(f)
+                    if not isinstance(auth_list, list):
+                        auth_list = []
+                except json.JSONDecodeError:
+                    auth_list = []
+        else:
+            auth_list = []
+
+        # 동일 이름 있으면 숫자 붙이기
+        existing_names = [user.get("name") for user in auth_list]
+        if existing_names:
+            base_name = user_data["name"]
+            new_name = base_name
+            count = 1
+            while new_name in existing_names:
+                new_name = f"{base_name}{count}"
+                count += 1
+                st.write(f"동명이인이 있습니다. {new_name}으로만 가입하실 수 있습니다. 계속하시겠다면 아래 확인 버튼을 눌러 주세요.")
+                if st.button("이름 설정 완료"):
+                    user_data["name"] = new_name
+        else:
+            user_data["name"] = name
+            st.write(f"{name}으로 가입하실 수 있습니다.")
+
 password = st.text_input("비밀번호 (영문/숫자 포함 8자 이상)", type="password")
 
 # 정규식 검사
@@ -85,7 +123,7 @@ if st.button("회원가입 완료"):
         # 저장 로직 (예: DB 저장 또는 세션에 저장)
         #user_data = {
         st.session_state.user_data = {
-            "이름": name,
+            //"이름": name,
             "비밀번호": password,
             "이동수단": transport,
             "장애 사항":  disability_option,
@@ -98,5 +136,12 @@ if st.button("회원가입 완료"):
             "관계2": relation2 or None,
             "이메일": email or None
         }
-        st.success("회원가입이 완료되었습니다!")
-        st.switch_page("pages/log_in.py")
+    
+    # 리스트에 추가
+    auth_list.append(user_data)
+
+    # 파일 저장
+    with open(auth_file_path, "w", encoding="utf-8") as f:
+        json.dump(auth_list, f, ensure_ascii=False, indent=2)
+
+    st.success(f"가입이 완료되었습니다. 등록된 이름: {new_name}")

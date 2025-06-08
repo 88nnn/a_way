@@ -45,7 +45,7 @@ if category == "불편 경로 제보":
         "문턱 있음": "doorway_threshold",
         "계단 있음": "stairs",
         "좁은 통로": "narrow_passage",
-        "자동문 아님": "not_automatic_door"
+        "자동문 아님": "not_automatic_door",
         "휠체어 통행 불가": "no_wheelchair",
         "장애인 화장실 이용 불가": "bo_toilet",
         "점자 도보 끊김": "no_braille Walk",

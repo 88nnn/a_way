@@ -4,17 +4,7 @@ from streamlit_folium import st_folium
 import folium
 import json
 import os
-#import google.generativeai as genai
-"""
-# Gemini API 설정 (실제 API 키로 대체)
-#genai.configure(g_api_key="YOUR_GEMINI_API_KEY")
-try:
-    genai.configure(st.secrets["g_api_key"])
-except Exception as e:
-    st.error("API 키를 불러오지 못했습니다. ..streamlit/secrets.toml을 확인해 주세요.")
-    st.stop()
-st.write("DEBUG - secrets:", st.secrets)
-"""
+
 user_data = st.session_state.get("user_data")
 if not user_data:
     st.write("이용자 정보가 없습니다. 익명으로 작성됩니다.")

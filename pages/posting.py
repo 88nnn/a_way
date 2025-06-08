@@ -82,7 +82,6 @@ content = st.text_area("본문을 입력해 주세요", height=300)
 create_at = now.strftime('%Y-%m-%d %H:%M:%S')
 
 if st.button("작성"):
-    else:
         # 파일 경로
         report_path = "data/reports.json"
         os.makedirs("data", exist_ok=True)

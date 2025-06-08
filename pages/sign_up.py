@@ -123,7 +123,6 @@ if st.button("회원가입 완료"):
         # 저장 로직 (예: DB 저장 또는 세션에 저장)
         #user_data = {
         st.session_state.user_data = {
-            //"이름": name,
             "비밀번호": password,
             "이동수단": transport,
             "장애 사항":  disability_option,

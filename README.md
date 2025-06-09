@@ -72,18 +72,20 @@
 | 단계 | 목표 |
 |------|------|
 | **1단계** | 정릉 일대 **시범 서비스** 개발 및 테스트 |
-| **2단계** | 성북구 전역 확대, **IoT 센서 고도화** |
+| **2단계** | 성북구 전역 확대, **IoT 센서 도입** |
 | **3단계** | **모바일 앱 개발**, **다국어 지원** 확장 |
 
 ---
 
 ## 📂 기술 스택
-
-- **Frontend**: Streamlit / Flask, Figma
-- **Backend**: Python, FastAPI, RESTful API
+### 이용
+- **Frontend**: Streamlit / Flask(예정), Figma
+- **Backend**: Python, FastAPI(예정), RESTful API(예정)
 - **지도 서비스**: T-map API
+- **AI/ML**: scikit-learn (경로 최적화), Gemini API (자연어 피드백 매칭)
+  
+### 추가 예정
 - **데이터 처리**: Pandas, GeoPandas, NumPy
-- **AI/ML**: scikit-learn (경로 최적화), Gemini API
 - **IoT 연동**: MQTT, Firebase, Arduino/Raspberry Pi
 - **DevOps**: Docker, GitHub Actions, AWS EC2
 
